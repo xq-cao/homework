@@ -34,4 +34,8 @@ public class Parkinglot {
     public int getParkingSpaceCount() {
         return maxSpaces - parkingSpace.size();
     }
+
+    public double getParkingSpaceRate() {
+        return ((double)getParkingSpaceCount() / maxSpaces);
+    }
 }

@@ -7,19 +7,43 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
 
 public class ParkinglotTest {
-    
+
     @Test
     public void shouldGetParkingSpaceCount() {
         Parkinglot parkinglot = new Parkinglot("aa", 2);
-        
+
         assertThat(parkinglot.getParkingSpaceCount(), is(2));
     }
-    
+
+    @Test
+    public void shouldGetOneRateWhenNoCarInParkinglot() {
+        Parkinglot parkinglot = new Parkinglot("aa", 2);
+
+        assertThat(parkinglot.getParkingSpaceRate(), is(1.0));
+    }
+
+    @Test
+    public void shouldGetCorrectRateWhenNoCarInParkinglot() {
+        Parkinglot parkinglot = new Parkinglot("aa", 2);
+        parkinglot.parkCar("111");
+
+        assertThat(parkinglot.getParkingSpaceRate(), is(0.5));
+    }
+
+    @Test
+    public void shouldGetZeroRateWhenParkinglotIsFull() {
+        Parkinglot parkinglot = new Parkinglot("aa", 2);
+        parkinglot.parkCar("111");
+        parkinglot.parkCar("222");
+
+        assertThat(parkinglot.getParkingSpaceRate(), is(0.0));
+    }
+
     @Test
     public void shouldGetCorrectParkingSpaceCountWhenParkOneCarAfter() {
         Parkinglot parkinglot = new Parkinglot("aa", 3);
         parkinglot.parkCar("111");
-        
+
         assertThat(parkinglot.getParkingSpaceCount(), is(2));
     }
 
