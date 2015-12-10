@@ -5,17 +5,16 @@ import java.util.List;
 
 public class ParkingAgent {
 
-    private List<Parkinglot> parkinglots = new ArrayList<>();
+    protected List<Parkinglot> parkinglots = new ArrayList<>();
 
     public void addParkinglot(Parkinglot parkinglot) {
         parkinglots.add(parkinglot);
     }
 
     public String parkCar(String carNumber) {
-        for (Parkinglot parkinglot : parkinglots) {
-            String token = parkinglot.parkCar(carNumber);
-            if (token != null)
-                return token;
+        Parkinglot parkinglot = getAValidParkinglot();
+        if (parkinglot != null) {
+            return parkinglot.parkCar(carNumber);
         }
         return null;
     }
@@ -25,6 +24,15 @@ public class ParkingAgent {
             String carNumber = parkinglot.pickCar(token);
             if (carNumber != null)
                 return carNumber;
+        }
+        return null;
+    }
+
+    protected Parkinglot getAValidParkinglot() {
+        for (Parkinglot parkinglot : parkinglots) {
+            if (parkinglot.getParkingSpaceCount() > 0) {
+                return parkinglot;
+            }
         }
         return null;
     }

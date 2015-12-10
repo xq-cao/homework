@@ -7,6 +7,21 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
 
 public class ParkinglotTest {
+    
+    @Test
+    public void shouldGetParkingSpaceCount() {
+        Parkinglot parkinglot = new Parkinglot("aa", 2);
+        
+        assertThat(parkinglot.getParkingSpaceCount(), is(2));
+    }
+    
+    @Test
+    public void shouldGetCorrectParkingSpaceCountWhenParkOneCarAfter() {
+        Parkinglot parkinglot = new Parkinglot("aa", 3);
+        parkinglot.parkCar("111");
+        
+        assertThat(parkinglot.getParkingSpaceCount(), is(2));
+    }
 
     @Test
     public void shouldParkOneCar() {

@@ -30,4 +30,8 @@ public class Parkinglot {
     private String generageAToken(String carNumber) {
         return this.name + "_" + carNumber;
     }
+
+    public int getParkingSpaceCount() {
+        return maxSpaces - parkingSpace.size();
+    }
 }

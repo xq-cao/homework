@@ -7,6 +7,7 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ParkingAgentTest {
 
@@ -14,6 +15,7 @@ public class ParkingAgentTest {
     public void shouldParkOneCarIntoParkinglot() {
         ParkingAgent parkingAgent = new ParkingAgent();
         Parkinglot mockParkinglot = mock(Parkinglot.class);
+        when(mockParkinglot.getParkingSpaceCount()).thenReturn(2);
         parkingAgent.addParkinglot(mockParkinglot);
 
         parkingAgent.parkCar("111");
@@ -26,6 +28,7 @@ public class ParkingAgentTest {
         ParkingAgent parkingAgent = new ParkingAgent();
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
         Parkinglot mockParkinglot = mock(Parkinglot.class);
+        when(mockParkinglot.getParkingSpaceCount()).thenReturn(2);
         parkingAgent.addParkinglot(mockParkinglot);
 
         parkingAgent.parkCar("111");
