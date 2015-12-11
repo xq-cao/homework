@@ -27,15 +27,15 @@ public class Parkinglot {
         return parkingSpace.remove(token);
     }
 
-    private String generageAToken(String carNumber) {
-        return this.name + "_" + carNumber;
-    }
-
     public int getParkingSpaceCount() {
         return maxSpaces - parkingSpace.size();
     }
 
     public double getParkingSpaceRate() {
         return ((double)getParkingSpaceCount() / maxSpaces);
+    }
+
+    private String generageAToken(String carNumber) {
+        return this.name + "_" + carNumber;
     }
 }
