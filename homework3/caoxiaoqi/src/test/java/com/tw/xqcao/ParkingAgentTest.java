@@ -1,5 +1,6 @@
 package com.tw.xqcao;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -11,9 +12,15 @@ import static org.mockito.Mockito.when;
 
 public class ParkingAgentTest {
 
+    ParkingAgent parkingAgent = null;
+
+    @Before
+    public void setUp() {
+        parkingAgent = new ParkingAgent();
+    }
+
     @Test
-    public void shouldParkOneCarIntoParkinglot() {
-        ParkingAgent parkingAgent = new ParkingAgent();
+    public void shouldParkOneCarIntoParkinglotWhenParkinglotIsNotFull() {
         Parkinglot mockParkinglot = mock(Parkinglot.class);
         when(mockParkinglot.getParkingSpaceCount()).thenReturn(2);
         parkingAgent.addParkinglot(mockParkinglot);
@@ -25,7 +32,6 @@ public class ParkingAgentTest {
 
     @Test
     public void shouldParkOneCarIntoNextParkinglotWhenCurrentParkinglotIsFull() {
-        ParkingAgent parkingAgent = new ParkingAgent();
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
         Parkinglot mockParkinglot = mock(Parkinglot.class);
         when(mockParkinglot.getParkingSpaceCount()).thenReturn(2);
@@ -39,7 +45,6 @@ public class ParkingAgentTest {
 
     @Test
     public void shouldNotParkCarWhenAgentHaventParkinglot() {
-        ParkingAgent parkingAgent = new ParkingAgent();
         String token = parkingAgent.parkCar("111");
 
         assertThat(token, nullValue());
@@ -47,7 +52,6 @@ public class ParkingAgentTest {
 
     @Test
     public void shouldNotParkCarWhenAgentHaventEmptyParkinglot() {
-        ParkingAgent parkingAgent = new ParkingAgent();
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
         parkingAgent.parkCar("111");
 
@@ -58,7 +62,6 @@ public class ParkingAgentTest {
 
     @Test
     public void shouldPickOneCarByValidToken() {
-        ParkingAgent parkingAgent = new ParkingAgent();
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
         String token = parkingAgent.parkCar("111");
         String carNumber = parkingAgent.pickCar(token);
@@ -68,7 +71,6 @@ public class ParkingAgentTest {
 
     @Test
     public void shouldNotPickCarWhenCarAlreadyBePicked() {
-        ParkingAgent parkingAgent = new ParkingAgent();
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
         String token = parkingAgent.parkCar("111");
         parkingAgent.pickCar(token);
@@ -79,7 +81,6 @@ public class ParkingAgentTest {
 
     @Test
     public void shouldNotPickCarWhenTokenIsInvalid() {
-        ParkingAgent parkingAgent = new ParkingAgent();
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
         parkingAgent.parkCar("111");
 
