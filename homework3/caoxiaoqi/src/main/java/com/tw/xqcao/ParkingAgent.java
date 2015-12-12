@@ -13,9 +13,9 @@ public class ParkingAgent {
     }
 
     public String parkCar(String carNumber) {
-        Parkinglot parkinglot = findBestParkinglot();
-        if (parkinglot != null) {
-            return parkinglot.parkCar(carNumber);
+        Optional<Parkinglot> bestParkinglot = findBestParkinglot();
+        if (bestParkinglot.isPresent()) {
+            return bestParkinglot.get().parkCar(carNumber);
         }
         return null;
     }
@@ -29,10 +29,9 @@ public class ParkingAgent {
         return null;
     }
 
-    protected Parkinglot findBestParkinglot() {
-        Optional<Parkinglot> firstOption = parkinglots.stream()
+    protected Optional<Parkinglot> findBestParkinglot() {
+        return parkinglots.stream()
                 .filter(parkinglot -> parkinglot.getParkingSpaceCount() > 0)
                 .findFirst();
-        return firstOption.isPresent()? firstOption.get() : null;
     }
 }
