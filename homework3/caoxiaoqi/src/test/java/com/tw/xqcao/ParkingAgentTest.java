@@ -25,9 +25,10 @@ public class ParkingAgentTest {
         when(mockParkinglot.getParkingSpaceCount()).thenReturn(2);
         parkingAgent.addParkinglot(mockParkinglot);
 
-        parkingAgent.parkCar("111");
+        Car car = new Car("111");
+        parkingAgent.parkCar(car);
 
-        verify(mockParkinglot).parkCar("111");
+        verify(mockParkinglot).parkCar(car);
     }
 
     @Test
@@ -37,15 +38,16 @@ public class ParkingAgentTest {
         when(mockParkinglot.getParkingSpaceCount()).thenReturn(2);
         parkingAgent.addParkinglot(mockParkinglot);
 
-        parkingAgent.parkCar("111");
-        parkingAgent.parkCar("222");
+        parkingAgent.parkCar(new Car("111"));
+        Car car = new Car("222");
+        parkingAgent.parkCar(car);
 
-        verify(mockParkinglot).parkCar("222");
+        verify(mockParkinglot).parkCar(car);
     }
 
     @Test
     public void shouldNotParkCarWhenAgentHaventParkinglot() {
-        String token = parkingAgent.parkCar("111");
+        String token = parkingAgent.parkCar(new Car("111"));
 
         assertThat(token, nullValue());
     }
@@ -53,9 +55,9 @@ public class ParkingAgentTest {
     @Test
     public void shouldNotParkCarWhenAgentHaventEmptyParkinglot() {
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
-        parkingAgent.parkCar("111");
+        parkingAgent.parkCar(new Car("111"));
 
-        String token = parkingAgent.parkCar("222");
+        String token = parkingAgent.parkCar(new Car("222"));
 
         assertThat(token, nullValue());
     }
@@ -63,29 +65,26 @@ public class ParkingAgentTest {
     @Test
     public void shouldPickOneCarByValidToken() {
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
-        String token = parkingAgent.parkCar("111");
-        String carNumber = parkingAgent.pickCar(token);
+        Car car = new Car("111");
+        String token = parkingAgent.parkCar(car);
 
-        assertThat(carNumber, is("111"));
+        assertThat(parkingAgent.pickCar(token), is(car));
     }
 
     @Test
     public void shouldNotPickCarWhenCarAlreadyBePicked() {
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
-        String token = parkingAgent.parkCar("111");
+        String token = parkingAgent.parkCar(new Car("111"));
         parkingAgent.pickCar(token);
-        String carNumber = parkingAgent.pickCar(token);
 
-        assertThat(carNumber, nullValue());
+        assertThat(parkingAgent.pickCar(token), nullValue());
     }
 
     @Test
     public void shouldNotPickCarWhenTokenIsInvalid() {
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
-        parkingAgent.parkCar("111");
+        parkingAgent.parkCar(new Car("111"));
 
-        String carNumber = parkingAgent.pickCar("invalid token");
-
-        assertThat(carNumber, nullValue());
+        assertThat(parkingAgent.pickCar("invalid token"), nullValue());
     }
 }

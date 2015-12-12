@@ -12,19 +12,16 @@ public class ParkingAgent {
         parkinglots.add(parkinglot);
     }
 
-    public String parkCar(String carNumber) {
+    public String parkCar(Car car) {
         Optional<Parkinglot> bestParkinglot = findBestParkinglot();
-        if (bestParkinglot.isPresent()) {
-            return bestParkinglot.get().parkCar(carNumber);
-        }
-        return null;
+        return bestParkinglot.isPresent()? bestParkinglot.get().parkCar(car) : null;
     }
 
-    public String pickCar(String token) {
+    public Car pickCar(String token) {
         for (Parkinglot parkinglot : parkinglots) {
-            String carNumber = parkinglot.pickCar(token);
-            if (carNumber != null)
-                return carNumber;
+            Car car = parkinglot.pickCar(token);
+            if (car != null)
+                return car;
         }
         return null;
     }

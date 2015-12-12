@@ -15,10 +15,9 @@ public class ParkingSmartAgentTest {
         parkingSmartAgent.addParkinglot(lessSpaceParkinglot);
         parkingSmartAgent.addParkinglot(moreSpaceParkinglot);
 
-        String token = parkingSmartAgent.parkCar("111");
+        Car expectedCar = new Car("111");
+        String token = parkingSmartAgent.parkCar(expectedCar);
 
-        String carNumber = moreSpaceParkinglot.pickCar(token);
-
-        assertThat(carNumber, is("111"));
+        assertThat(moreSpaceParkinglot.pickCar(token), is(expectedCar));
     }
 }

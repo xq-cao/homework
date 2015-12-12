@@ -12,15 +12,15 @@ public class ParkingBestSmartAgentTest {
         ParkingBestSmartAgent parkingBestSmartAgent = new ParkingBestSmartAgent();
         Parkinglot bestParkinglot = new Parkinglot("aa", 5);
         Parkinglot lessParkinglot = new Parkinglot("bb", 5);
-        bestParkinglot.parkCar("111");
-        lessParkinglot.parkCar("222");
-        lessParkinglot.parkCar("333");
+        bestParkinglot.parkCar(new Car("111"));
+        lessParkinglot.parkCar(new Car("222"));
+        lessParkinglot.parkCar(new Car("333"));
         parkingBestSmartAgent.addParkinglot(lessParkinglot);
         parkingBestSmartAgent.addParkinglot(bestParkinglot);
 
-        String token = parkingBestSmartAgent.parkCar("444");
-        String carNumber = bestParkinglot.pickCar(token);
+        Car expectedCar = new Car("444");
+        String token = parkingBestSmartAgent.parkCar(expectedCar);
 
-        assertThat(carNumber, is("444"));
+        assertThat(bestParkinglot.pickCar(token), is(expectedCar));
     }
 }
