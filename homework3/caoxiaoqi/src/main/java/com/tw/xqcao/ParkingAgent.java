@@ -12,7 +12,7 @@ public class ParkingAgent {
     }
 
     public String parkCar(String carNumber) {
-        Parkinglot parkinglot = getAValidParkinglot();
+        Parkinglot parkinglot = findBestParkinglot();
         if (parkinglot != null) {
             return parkinglot.parkCar(carNumber);
         }
@@ -28,7 +28,7 @@ public class ParkingAgent {
         return null;
     }
 
-    protected Parkinglot getAValidParkinglot() {
+    protected Parkinglot findBestParkinglot() {
         for (Parkinglot parkinglot : parkinglots) {
             if (parkinglot.getParkingSpaceCount() > 0) {
                 return parkinglot;
