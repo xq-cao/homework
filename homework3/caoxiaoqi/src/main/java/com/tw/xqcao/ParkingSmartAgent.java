@@ -1,15 +1,14 @@
 package com.tw.xqcao;
 
+import java.util.Optional;
+
 public class ParkingSmartAgent extends ParkingAgent{
 
     @Override
     protected Parkinglot findBestParkinglot() {
-        Parkinglot bestParkinglot = null;
-        for (Parkinglot parkinglot : parkinglots) {
-            if (bestParkinglot == null || parkinglot.getParkingSpaceCount() > bestParkinglot.getParkingSpaceCount()) {
-                bestParkinglot = parkinglot;
-            }
-        }
-        return bestParkinglot;
+        Optional<Parkinglot> bestOption = parkinglots.stream().max(
+                (a, b) -> Integer.compare(a.getParkingSpaceCount(), b.getParkingSpaceCount())
+        );
+        return bestOption.isPresent()? bestOption.get() : null;
     }
 }

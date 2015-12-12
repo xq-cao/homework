@@ -2,6 +2,7 @@ package com.tw.xqcao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ParkingAgent {
 
@@ -29,11 +30,9 @@ public class ParkingAgent {
     }
 
     protected Parkinglot findBestParkinglot() {
-        for (Parkinglot parkinglot : parkinglots) {
-            if (parkinglot.getParkingSpaceCount() > 0) {
-                return parkinglot;
-            }
-        }
-        return null;
+        Optional<Parkinglot> firstOption = parkinglots.stream()
+                .filter(parkinglot -> parkinglot.getParkingSpaceCount() > 0)
+                .findFirst();
+        return firstOption.isPresent()? firstOption.get() : null;
     }
 }
