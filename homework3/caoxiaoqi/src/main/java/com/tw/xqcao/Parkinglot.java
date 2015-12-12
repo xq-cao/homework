@@ -7,7 +7,7 @@ public class Parkinglot {
 
     private final int maxSpaces;
     private final String name;
-    private Map<String, String> parkingSpace = new HashMap<>();
+    private Map<String, String> parkedCars = new HashMap<>();
 
     public Parkinglot(String name, int maxSpaces) {
         this.name = name;
@@ -15,27 +15,27 @@ public class Parkinglot {
     }
 
     public String parkCar(String carNumber) {
-        if (parkingSpace.size() < maxSpaces) {
-            String token = generageAToken(carNumber);
-            parkingSpace.put(generageAToken(carNumber), carNumber);
+        if (parkedCars.size() < maxSpaces) {
+            String token = generageToken(carNumber);
+            parkedCars.put(token, carNumber);
             return token;
         }
         return null;
     }
 
     public String pickCar(String token) {
-        return parkingSpace.remove(token);
+        return parkedCars.remove(token);
     }
 
     public int getParkingSpaceCount() {
-        return maxSpaces - parkingSpace.size();
+        return maxSpaces - parkedCars.size();
     }
 
     public double getParkingSpaceRate() {
         return ((double)getParkingSpaceCount() / maxSpaces);
     }
 
-    private String generageAToken(String carNumber) {
+    private String generageToken(String carNumber) {
         return this.name + "_" + carNumber;
     }
 }
