@@ -25,11 +25,13 @@ public class ParkingAgent {
     }
 
     public Car pickCar(String token) {
-        for (Parkinglot parkinglot : parkinglots) {
-            Car car = parkinglot.pickCar(token);
-            if (car != null)
-                return car;
-        }
-        return null;
+        Optional<Parkinglot> containsParkinglot = findContainsParkinglot(token);
+        return containsParkinglot.isPresent()? containsParkinglot.get().pickCar(token) : null;
+    }
+
+    private Optional<Parkinglot> findContainsParkinglot(String token) {
+        return parkinglots.stream()
+                .filter(parkinglot -> parkinglot.containsCar(token))
+                .findFirst();
     }
 }

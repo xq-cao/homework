@@ -8,9 +8,9 @@ import java.util.Optional;
 public class CommonFinder implements Finder {
 
     @Override
-    public Optional<Parkinglot> findBestParkinglot(List<Parkinglot> parkinglots1) {
-        return parkinglots1.stream()
-                .filter(parkinglot -> parkinglot.leftSpaceCount() > 0)
+    public Optional<Parkinglot> findBestParkinglot(List<Parkinglot> parkinglots) {
+        return parkinglots.stream()
+                .filter(parkinglot -> parkinglot.hasSpace())
                 .findFirst();
     }
 }

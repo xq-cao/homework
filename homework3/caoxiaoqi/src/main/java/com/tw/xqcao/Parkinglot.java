@@ -15,7 +15,7 @@ public class Parkinglot {
     }
 
     public String parkCar(Car car) {
-        if (parkedCars.size() < maxSpaces) {
+        if (hasSpace()) {
             String token = generageToken(car);
             parkedCars.put(token, car);
             return token;
@@ -29,6 +29,14 @@ public class Parkinglot {
 
     public int leftSpaceCount() {
         return maxSpaces - parkedCars.size();
+    }
+
+    public boolean hasSpace() {
+        return parkedCars.size() < maxSpaces;
+    }
+
+    public boolean containsCar(String token) {
+        return parkedCars.containsKey(token);
     }
 
     public double spaceRate() {

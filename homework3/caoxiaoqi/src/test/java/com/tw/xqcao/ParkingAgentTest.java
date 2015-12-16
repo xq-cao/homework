@@ -23,7 +23,7 @@ public class ParkingAgentTest {
     @Test
     public void shouldParkOneCarIntoParkinglotWhenParkinglotIsNotFull() {
         Parkinglot mockParkinglot = mock(Parkinglot.class);
-        when(mockParkinglot.leftSpaceCount()).thenReturn(2);
+        when(mockParkinglot.hasSpace()).thenReturn(true);
         parkingAgent.addParkinglot(mockParkinglot);
 
         Car car = new Car("111");
@@ -36,7 +36,7 @@ public class ParkingAgentTest {
     public void shouldParkOneCarIntoNextParkinglotWhenCurrentParkinglotIsFull() {
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
         Parkinglot mockParkinglot = mock(Parkinglot.class);
-        when(mockParkinglot.leftSpaceCount()).thenReturn(2);
+        when(mockParkinglot.hasSpace()).thenReturn(true);
         parkingAgent.addParkinglot(mockParkinglot);
 
         parkingAgent.parkCar(new Car("111"));
