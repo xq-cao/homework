@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class ParkingManagerTest {
 
-    private ParkingManager parkingManager;
+    private Parking parkingManager;
 
     @Before
     public void setUp() {

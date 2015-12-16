@@ -3,26 +3,28 @@ package com.tw.xqcao;
 import java.util.Arrays;
 import java.util.List;
 
-public class ParkingManager {
+public class ParkingManager implements Parking {
 
-    private final List<ParkingAgent> parkingAgents;
+    private final List<Parking> parkings;
 
-    public ParkingManager(ParkingAgent... parkingAgentList) {
-        parkingAgents = Arrays.asList(parkingAgentList);
+    public ParkingManager(Parking... parkingList) {
+        parkings = Arrays.asList(parkingList);
     }
 
+    @Override
     public String parkCar(Car car) {
-        for (ParkingAgent parkingAgent : parkingAgents) {
-            String token = parkingAgent.parkCar(car);
+        for (Parking parking : parkings) {
+            String token = parking.parkCar(car);
             if (token != null)
                 return token;
         }
         return null;
     }
 
+    @Override
     public Car pickCar(String token) {
-        for (ParkingAgent parkingAgent : parkingAgents) {
-            Car car = parkingAgent.pickCar(token);
+        for (Parking parking : parkings) {
+            Car car = parking.pickCar(token);
             if (car != null)
                 return car;
         }

@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class SuperParkingManagerTest {
 
-    private SuperParkingManager superParkingManager;
+    private ParkingManager superParkingManager;
 
     @Before
     public void setUp() {
@@ -21,10 +21,10 @@ public class SuperParkingManagerTest {
         ParkingAgent parkingAgent2 = new ParkingAgent(new CommonFinder());
         parkingAgent1.addParkinglot(parkinglot);
 
-        ParkingManager parkingManager1 = new ParkingManager(parkingAgent1, parkingAgent2);
-        ParkingManager parkingManager2 = new ParkingManager(parkingAgent1, parkingAgent2);
+        Parking parkingManager1 = new ParkingManager(parkingAgent1, parkingAgent2);
+        Parking parkingManager2 = new ParkingManager(parkingAgent1, parkingAgent2);
 
-        superParkingManager = new SuperParkingManager(parkingManager1, parkingManager2);
+        superParkingManager = new ParkingManager(parkingManager1, parkingManager2);
     }
 
     @Test

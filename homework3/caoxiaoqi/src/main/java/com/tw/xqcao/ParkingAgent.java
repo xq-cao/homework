@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ParkingAgent {
+public class ParkingAgent implements Parking{
 
     private final Finder finder;
     protected List<Parkinglot> parkinglots = new ArrayList<>();
@@ -19,11 +19,13 @@ public class ParkingAgent {
         parkinglots.add(parkinglot);
     }
 
+    @Override
     public String parkCar(Car car) {
         Optional<Parkinglot> bestParkinglot = finder.findBestParkinglot(parkinglots);
         return bestParkinglot.isPresent()? bestParkinglot.get().parkCar(car) : null;
     }
 
+    @Override
     public Car pickCar(String token) {
         Optional<Parkinglot> containsParkinglot = findContainsParkinglot(token);
         return containsParkinglot.isPresent()? containsParkinglot.get().pickCar(token) : null;
