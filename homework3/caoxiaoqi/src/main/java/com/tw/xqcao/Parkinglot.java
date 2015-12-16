@@ -27,12 +27,12 @@ public class Parkinglot {
         return parkedCars.remove(token);
     }
 
-    public int getParkingSpaceCount() {
+    public int leftSpaceCount() {
         return maxSpaces - parkedCars.size();
     }
 
-    public double getParkingSpaceRate() {
-        return ((double)getParkingSpaceCount() / maxSpaces);
+    public double spaceRate() {
+        return ((double) leftSpaceCount() / maxSpaces);
     }
 
     private String generageToken(Car car) {

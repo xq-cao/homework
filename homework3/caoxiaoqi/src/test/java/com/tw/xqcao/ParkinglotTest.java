@@ -12,14 +12,14 @@ public class ParkinglotTest {
     public void shouldGetParkingSpaceCount() {
         Parkinglot parkinglot = new Parkinglot("aa", 2);
 
-        assertThat(parkinglot.getParkingSpaceCount(), is(2));
+        assertThat(parkinglot.leftSpaceCount(), is(2));
     }
 
     @Test
     public void shouldGetOneRateWhenNoCarInParkinglot() {
         Parkinglot parkinglot = new Parkinglot("aa", 2);
 
-        assertThat(parkinglot.getParkingSpaceRate(), is(1.0));
+        assertThat(parkinglot.spaceRate(), is(1.0));
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ParkinglotTest {
         Parkinglot parkinglot = new Parkinglot("aa", 2);
         parkinglot.parkCar(new Car("111"));
 
-        assertThat(parkinglot.getParkingSpaceRate(), is(0.5));
+        assertThat(parkinglot.spaceRate(), is(0.5));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ParkinglotTest {
         parkinglot.parkCar(new Car("111"));
         parkinglot.parkCar(new Car("222"));
 
-        assertThat(parkinglot.getParkingSpaceRate(), is(0.0));
+        assertThat(parkinglot.spaceRate(), is(0.0));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ParkinglotTest {
         Parkinglot parkinglot = new Parkinglot("aa", 3);
         parkinglot.parkCar(new Car("111"));
 
-        assertThat(parkinglot.getParkingSpaceCount(), is(2));
+        assertThat(parkinglot.leftSpaceCount(), is(2));
     }
 
     @Test

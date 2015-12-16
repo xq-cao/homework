@@ -1,5 +1,6 @@
 package com.tw.xqcao;
 
+import com.tw.xqcao.finder.CommonFinder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,13 +17,13 @@ public class ParkingAgentTest {
 
     @Before
     public void setUp() {
-        parkingAgent = new ParkingAgent();
+        parkingAgent = new ParkingAgent(new CommonFinder());
     }
 
     @Test
     public void shouldParkOneCarIntoParkinglotWhenParkinglotIsNotFull() {
         Parkinglot mockParkinglot = mock(Parkinglot.class);
-        when(mockParkinglot.getParkingSpaceCount()).thenReturn(2);
+        when(mockParkinglot.leftSpaceCount()).thenReturn(2);
         parkingAgent.addParkinglot(mockParkinglot);
 
         Car car = new Car("111");
@@ -35,7 +36,7 @@ public class ParkingAgentTest {
     public void shouldParkOneCarIntoNextParkinglotWhenCurrentParkinglotIsFull() {
         parkingAgent.addParkinglot(new Parkinglot("aa", 1));
         Parkinglot mockParkinglot = mock(Parkinglot.class);
-        when(mockParkinglot.getParkingSpaceCount()).thenReturn(2);
+        when(mockParkinglot.leftSpaceCount()).thenReturn(2);
         parkingAgent.addParkinglot(mockParkinglot);
 
         parkingAgent.parkCar(new Car("111"));

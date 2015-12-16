@@ -1,5 +1,6 @@
 package com.tw.xqcao;
 
+import com.tw.xqcao.finder.SmartFinder;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -9,14 +10,14 @@ public class ParkingSmartAgentTest {
 
     @Test
     public void shouldParkOneCarIntoParkinglotThatHaveMostParkingSpace() {
-        ParkingSmartAgent parkingSmartAgent = new ParkingSmartAgent();
+        ParkingAgent parkingAgent = new ParkingAgent(new SmartFinder());
         Parkinglot lessSpaceParkinglot = new Parkinglot("aa", 2);
         Parkinglot moreSpaceParkinglot = new Parkinglot("bb", 3);
-        parkingSmartAgent.addParkinglot(lessSpaceParkinglot);
-        parkingSmartAgent.addParkinglot(moreSpaceParkinglot);
+        parkingAgent.addParkinglot(lessSpaceParkinglot);
+        parkingAgent.addParkinglot(moreSpaceParkinglot);
 
         Car expectedCar = new Car("111");
-        String token = parkingSmartAgent.parkCar(expectedCar);
+        String token = parkingAgent.parkCar(expectedCar);
 
         assertThat(moreSpaceParkinglot.pickCar(token), is(expectedCar));
     }
